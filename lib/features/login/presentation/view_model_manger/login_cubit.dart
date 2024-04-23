@@ -74,6 +74,7 @@ class LoginCubit extends Cubit<LoginState> {
         User user = User.fromJson(apiResponse.response!.data);
         await _saveUserToken(user.token);
         await _saveUserCurrentName(user.user.name);
+        _loginRepo.updateToken();
         emit(const LoginSuccessfulState());
       } else {
         if (context.mounted) {
